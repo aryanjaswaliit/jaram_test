@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Project Phase Path Line</title>
+	<style>
+		canvas {
+			background-color: black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="path-line"></canvas>
+
+	<script>
+		var canvas = document.getElementById("path-line");
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight+600;
+		var ctx = canvas.getContext("2d");
+		var points = [
+        {x: 150, y: 100, color: "red", text: "Starting"},
+			{x: 600, y: 300, color: "red", text: "Ai news"},
+			{x: 300, y: 450, color: "green", text: "Ai Study"},
+			{x: 700, y: 550, color: "blue", text: "Ai Weather"},
+			{x: 400, y: 750, color: "orange", text: "Ai Social"},
+            {x: 600, y: 850, color: "lime", text: "Etc"},
+            
+		];
+
+		ctx.beginPath();
+		ctx.strokeStyle = "lime";
+		ctx.lineWidth = 5;
+
+		var point1 = points[0];
+		var point2 = points[1];
+		ctx.moveTo(point1.x, point1.y);
+		ctx.lineTo(point2.x, point2.y);
+
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.strokeStyle = "white";
+		ctx.lineWidth = 5;
+
+		for (var i = 1; i < points.length - 1; i++) {
+			var point1 = points[i];
+			var point2 = points[i+1];
+			ctx.moveTo(point1.x, point1.y);
+			ctx.lineTo(point2.x, point2.y);
+		}
+
+		ctx.stroke();
+
+		for (var i = 0; i < points.length; i++) {
+			var point = points[i];
+			ctx.fillStyle = point.color;
+			ctx.beginPath();
+			ctx.arc(point.x, point.y, 20, 0, 2*Math.PI);
+			ctx.fill();
+
+			ctx.fillStyle = "white";
+			ctx.font = "bold 20px Arial";
+			ctx.textAlign = "center";
+			ctx.fillText(point.text, point.x+40, point.y-30);
+		}
+	</script>
+</body>
+</html>
